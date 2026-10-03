@@ -34,20 +34,22 @@ and failure tests first. Then test revocation and store unavailability without
 leaking backend errors or values. No backend beyond environment injection exists
 in the current code.
 
-## 3. A fixed-policy execution boundary the caller cannot change
+## 3. A protected execution boundary for the fixed-policy wrapper
 
 The current CLI accepts operator-controlled `-policy`. Letting an agent choose
 that argument, read the process environment, alter the executable or call the
-backend directly defeats the intended boundary. Add a narrow wrapper under an
-independent identity that accepts only bounded request-template input and pins
-one read-only policy and the backend binding.
+backend directly defeats the intended boundary. The new `veilsplice-finmind` entry
+point fixes its policy and backend alias in code, accepts only bounded typed
+input, distinguishes authenticated/anonymous
+operations and pins TaiwanStockPrice. It closes the arbitrary-policy input path
+for that entry point, but still must run under an independent identity.
 
-For the FinMind example, keep exact GET endpoints and add the deployment's needed
-request-value constraints: approved datasets, stock identifiers/date-window caps,
-and whether Bearer authentication is mandatory. Add caller authorization, request
+The FinMind wrapper already fixes exact GET endpoints and enforces one 4-6 digit
+stock ID, at most 31 inclusive calendar days, fixed response schemas and mandatory
+authentication on its authenticated operations. Add caller authorization, request
 quotas and secret-free audit events. A local process boundary or approved managed
 job runner may suffice; an internet-facing server is not inherently required.
-No wrapper, new identity, system permission change or egress rule was deployed.
+No new identity, system permission change, egress rule or deployment was created.
 
 ## 4. An explicitly approved end-to-end check with rollback
 

@@ -18,8 +18,10 @@ This CLI does not provide process isolation, authentication, multi-tenancy,
 authorization of business operations, audit storage, rate limits or a secure input
 UI. In particular, `-policy` is trusted operator input: letting an untrusted
 caller select or create that file defeats every endpoint and secret binding rule.
-An eventual fixed-policy wrapper must use a separate identity and deny the caller
-policy, binary, environment and backend access; no such wrapper is supplied here.
+A fixed-policy wrapper must use a separate identity and deny the caller
+policy, binary, environment and backend access. The optional FinMind wrapper
+fixes its input policy in code, but no independent OS identity or deployment
+boundary is supplied here.
 Do not give a caller arbitrary shell access and then assume this tool hides
 secrets from that same caller. Do not load real user credentials until an approved
 input and backend path exists.

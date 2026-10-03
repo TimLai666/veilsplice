@@ -15,7 +15,8 @@ agent.** A caller who can choose a new policy can point an environment-variable
 binding at any value its process can read and authorize an attacker destination.
 Do not expose arbitrary CLI arguments or shell execution to that caller. A future
 service/wrapper must pin a read-only policy under a separate runtime identity and
-accept only bounded request-template input. That deployment is not included.
+accept only bounded request input. The optional [fixed-policy FinMind entry point](docs/finmind-wrapper.md)
+now narrows that input surface, but deployment and OS isolation are not included.
 
 ## What works
 
@@ -176,8 +177,9 @@ legitimate special-purpose destinations. No IP-policy maintenance service exists
 1. Choose a secure user-input mechanism and audited secret backend, with explicit
    user authorization. **Secure input, encryption at rest, persistence, rotation,
    revocation, access grants and account linking remain unresolved here.**
-2. Run the executor and policy under an identity the caller cannot inspect or
-   modify, with tightly scoped backend access and OS/network egress controls.
+2. The optional FinMind wrapper fixes endpoints, alias, dataset, input bounds and
+   response schema. Run that executor and its backend under an identity the caller
+   cannot inspect or modify, with tightly scoped backend access and OS/network egress controls.
 3. Add authentication, caller/target authorization, request schemas, rate limits,
    audit events containing no secrets, and provider-specific response review.
 4. Review API side effects, allowed response fields and data recipients. A safe
@@ -196,6 +198,9 @@ documented endpoints, backend-referenced Bearer templates, anonymous/authenticat
 request fixtures and offline projected-response tests. It does not establish a
 live authenticated connection. The [secure-input gap assessment](docs/secure-input-gap.md)
 identifies the minimum missing input, backend, isolation and verification work.
+The separate [fixed-policy FinMind wrapper](docs/finmind-wrapper.md) rejects
+caller-supplied policies, headers, destinations and aliases, and enforces bounded
+stock/date input. It still requires isolated deployment and an approved backend.
 
 ## Development
 

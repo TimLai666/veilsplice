@@ -50,6 +50,9 @@ validated by this prototype. The policy also permits an omitted authorization
 header, as the explicit anonymous example demonstrates. A deployment that must
 require authentication, pin a dataset or cap date ranges needs those additional
 request constraints in its trusted wrapper before exposure to untrusted callers.
+Those restrictions are now available in the separate
+[fixed-policy wrapper](../../docs/finmind-wrapper.md); they do not change the generic
+CLI examples above and still require OS/runtime isolation.
 
 ## Run checks without FinMind traffic
 

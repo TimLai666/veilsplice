@@ -1,0 +1,9 @@
+{
+  "target": "finmind_prices",
+  "query": {
+    "dataset": "TaiwanStockPrice",
+    "data_id": "2330",
+    "start_date": "2020-04-02",
+    "end_date": "2020-04-06"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "target": "quotes",
+  "headers": { "Authorization": "Bearer ${secret:demo}" },
+  "query": { "symbol": "DEMO", "api_key": "prefix-${secret:demo}-suffix" },
+  "json": {
+    "credential": "custom-prefix:${secret:demo}:custom-suffix",
+    "symbol": "DEMO",
+    "options": ["literal", "${secret:demo}"]
+  }
+}

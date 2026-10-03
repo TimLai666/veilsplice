@@ -1,0 +1,4 @@
+{
+  "target": "finmind_usage",
+  "headers": { "Authorization": "Bearer ${secret:finmind_token}" }
+}

@@ -1,0 +1,28 @@
+{
+  "secrets": { "demo": "VEILSPLICE_DEMO_KEY" },
+  "targets": {
+    "quotes": {
+      "url": "https://api.example.com/v1/quotes",
+      "method": "POST",
+      "secrets": ["demo"],
+      "headers": ["Authorization", "X-API-Key"],
+      "query": ["symbol", "api_key"],
+      "body": "json",
+      "response": {
+        "json_pointer": "/data",
+        "fields": { "date": "date", "open": "number", "close": "number" },
+        "max_bytes": 65536,
+        "max_items": 100
+      }
+    },
+    "form_demo": {
+      "url": "https://api.example.com/v1/form",
+      "method": "POST",
+      "secrets": ["demo"],
+      "headers": [],
+      "query": [],
+      "body": "form",
+      "form": ["credential", "symbol"]
+    }
+  }
+}

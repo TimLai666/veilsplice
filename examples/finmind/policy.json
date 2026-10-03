@@ -1,0 +1,33 @@
+{
+  "secrets": { "finmind_token": "VEILSPLICE_FINMIND_TOKEN" },
+  "targets": {
+    "finmind_prices": {
+      "url": "https://api.finmindtrade.com/api/v4/data",
+      "method": "GET",
+      "secrets": ["finmind_token"],
+      "headers": ["Authorization"],
+      "query": ["dataset", "data_id", "start_date", "end_date"],
+      "body": "none",
+      "response": {
+        "json_pointer": "/data",
+        "fields": { "date": "date", "open": "number", "close": "number" },
+        "max_bytes": 65536,
+        "max_items": 100
+      }
+    },
+    "finmind_usage": {
+      "url": "https://api.web.finmindtrade.com/v2/user_info",
+      "method": "GET",
+      "secrets": ["finmind_token"],
+      "headers": ["Authorization"],
+      "query": [],
+      "body": "none",
+      "response": {
+        "json_pointer": "",
+        "fields": { "user_count": "number", "api_request_limit": "number" },
+        "max_bytes": 4096,
+        "max_items": 1
+      }
+    }
+  }
+}

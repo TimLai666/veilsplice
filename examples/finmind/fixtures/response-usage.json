@@ -1,0 +1,6 @@
+{
+  "user_count": 12,
+  "api_request_limit": 600,
+  "synthetic_private_field": "NOT_A_REAL_ACCOUNT",
+  "token": "FAKE_FINMIND_TOKEN_FOR_OFFLINE_TESTS_ONLY"
+}

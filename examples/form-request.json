@@ -1,0 +1,4 @@
+{
+  "target": "form_demo",
+  "form": { "credential": "left${secret:demo}right", "symbol": "DEMO" }
+}

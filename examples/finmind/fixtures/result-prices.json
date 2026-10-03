@@ -1,0 +1,8 @@
+{
+  "status_code": 200,
+  "body_discarded": false,
+  "data": [
+    { "date": "2020-04-02", "open": 100.25, "close": 101.5 },
+    { "date": "2020-04-06", "open": 102, "close": 103.25 }
+  ]
+}

@@ -1,5 +1,22 @@
 # VeilSplice
 
+VeilSplice maintains two separate source packages in this repository:
+
+- **Go CLI** at the repository root (`cmd/`, `internal/`, `examples/`): the
+  original dependency-free executor and fixed-policy FinMind entry point.
+- **Website** in [`web/`](web/README.md): the v7 TypeScript/React workbench,
+  FinMind/Whisper adapters, owner-scoped credential routes, MCP and tests.
+  It does not invoke or replace the Go CLI. It depends on private ChatGPT Sites
+  identity/dispatch and Cloudflare D1; this source is not a self-contained
+  authentication service or ready-to-run standalone deployment.
+
+Public source includes no live credentials, owner identity, Site/database IDs,
+production data or deployment access. [Web setup and maintenance](web/MAINTENANCE.md)
+explains the platform boundary, offline checks and separate release review.
+The Go and web packages use different template syntax and policy implementations.
+
+## Go CLI
+
 An experimental, dependency-free Go CLI that inserts secret aliases into requests
 and sends them only to administrator-approved HTTPS endpoints. MIT licensed.
 
@@ -18,7 +35,7 @@ service/wrapper must pin a read-only policy under a separate runtime identity an
 accept only bounded request input. The optional [fixed-policy FinMind entry point](docs/finmind-wrapper.md)
 now narrows that input surface, but deployment and OS isolation are not included.
 
-## What works
+## What works in the Go CLI
 
 - `${secret:alias}` anywhere inside a **header value, query value, JSON string
   value, or URL-encoded form value**, including prefixes, suffixes and repeated
@@ -172,7 +189,7 @@ roots, malicious public services, and newly introduced platform endpoints requir
 operator-level controls. The denylist is intentionally conservative and may deny
 legitimate special-purpose destinations. No IP-policy maintenance service exists.
 
-## Work still required before real deployment
+## Work still required before real CLI deployment
 
 1. Choose a secure user-input mechanism and audited secret backend, with explicit
    user authorization. **Secure input, encryption at rest, persistence, rotation,
@@ -202,7 +219,7 @@ The separate [fixed-policy FinMind wrapper](docs/finmind-wrapper.md) rejects
 caller-supplied policies, headers, destinations and aliases, and enforces bounded
 stock/date input. It still requires isolated deployment and an approved backend.
 
-## Development
+## Go development
 
 ```sh
 make check
@@ -219,3 +236,17 @@ projection, echo rejection, byte/item bounds and sanitized failures.
 Reference documentation: [Go HTTP transport](https://pkg.go.dev/net/http#Transport),
 [Go TLS configuration](https://pkg.go.dev/crypto/tls#Config),
 [Go IP address classification](https://pkg.go.dev/net/netip#Addr.IsPrivate).
+
+## Web development
+
+```sh
+cd web
+npm ci --ignore-scripts
+npm run check
+```
+
+Use Node.js 24 / npm 11. Web checks cover synthetic-data tests, TypeScript,
+ESLint and a build; they do not log in, provision infrastructure or deploy.
+See [web security and architecture](web/README.md),
+[maintenance](web/MAINTENANCE.md) and [third-party notices](web/THIRD_PARTY_NOTICES.md).
+The existing Go checks and the separate Web checks run independently in CI.

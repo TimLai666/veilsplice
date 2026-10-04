@@ -1,0 +1,1 @@
+ALTER TABLE `service_credentials` ADD `alias` text DEFAULT 'finmind_token' NOT NULL;

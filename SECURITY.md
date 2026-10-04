@@ -1,5 +1,11 @@
 # Security status
 
+This document describes the **Go CLI** threat model. The separate `web/` package
+has a Sites/D1 trust boundary, owner/CSRF authorization and credential persistence.
+Read [web security boundaries](web/README.md) and
+[deployment prerequisites](web/MAINTENANCE.md) before handling web credentials.
+Publishing either package does not establish a safe live deployment.
+
 Experimental prototype. No external security audit or production readiness claim.
 The only included secret backend is explicit environment-variable injection for
 controlled demonstrations. This is not a vault and does not encrypt or persist

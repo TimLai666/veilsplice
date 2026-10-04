@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1791050897044,
+      "tag": "0000_chemical_black_widow",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791083163605,
+      "tag": "0001_lovely_thor_girl",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791120984925,
+      "tag": "0002_hard_darkstar",
+      "breakpoints": true
+    }
+  ]
+}

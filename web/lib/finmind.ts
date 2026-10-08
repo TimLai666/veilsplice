@@ -53,7 +53,7 @@ export function projectPrices(raw:unknown,args:PriceArgs):Result {
   for(const row of obj.data){
     if(!row||typeof row!=="object")return fail("UPSTREAM_RESPONSE","資料來源回應格式不符預期。");
     const r=row as Record<string,unknown>;
-    if(r.stock_id!==args.stock_id||typeof r.date!=="string"||!/^\d{4}-\d{2}-\d{2}$/.test(r.date)||new Date(r.date+"T00:00:00Z").toISOString().slice(0,10)!==r.date||r.date<args.start_date||r.date>args.end_date||seen.has(r.date))return fail("UPSTREAM_RESPONSE","資料來源回應格式不符預期。");
+    if(r.stock_id!==args.stock_id||typeof r.date!=="string"||!/^\d{4}-\d{2}-\d{2}$/.test(r.date)||!Number.isFinite(Date.parse(r.date+"T00:00:00Z"))||new Date(r.date+"T00:00:00Z").toISOString().slice(0,10)!==r.date||r.date<args.start_date||r.date>args.end_date||seen.has(r.date))return fail("UPSTREAM_RESPONSE","資料來源回應格式不符預期。");
     const out:Record<string,unknown>={date:r.date,stock_id:args.stock_id};seen.add(r.date);
     for(const field of ["open","max","min","close","spread","Trading_Volume","Trading_money","Trading_turnover"]){if(!numeric(r[field]))return fail("UPSTREAM_RESPONSE","資料來源回應格式不符預期。");out[field]=r[field];}
     rows.push(out);
